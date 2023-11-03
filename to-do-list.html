@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(to bottom, #667eea, #764ba2);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    .container {
+        width: 500px;
+        background-color: #fff;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        padding: 20px;
+        display: none;
+    }
+    .container.show {
+        display: block;
+    }
+    .container h2 {
+        text-align: center;
+        color: #764ba2;
+    }
+    .input-container {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    input[type="text"] {
+        width: 70%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+    }
+    button {
+        padding: 10px 20px;
+        background-color: #667eea;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 10px;
+    }
+    button:hover {
+        background-color: #764ba2;
+    }
+    select {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ddd;
+    }
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    li {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    li:last-child {
+        border-bottom: none;
+    }
+    .high-priority {
+        color: red;
+    }
+    .low-priority {
+        color: green;
+    }
+    .due-date {
+        margin-left: 20px;
+        color: #667eea;
+    }
+    .remove-button {
+        background-color: #ff3333;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 20px;
+    }
+    .remove-button:hover {
+        background-color: #e60000;
+    }
+    .open-button {
+        background-color: #667eea;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        padding: 10px 20px;
+        margin: 20px 0;
+    }
+    .open-button:hover {
+        background-color: #764ba2;
+    }
+</style>
+</head>
+<body>
+
+<button class="open-button" onclick="toggleTodoList()">Open To-Do List</button>
+
+<div class="container" id="todoContainer">
+    <h2>To-Do List</h2>
+    <div class="input-container">
+        <input type="text" id="taskInput" placeholder="Enter your task">
+        <select id="prioritySelect">
+            <option value="high" class="high-priority">High Priority</option>
+            <option value="low" class="low-priority">Low Priority</option>
+        </select>
+        <input type="date" id="dueDate">
+        <button onclick="addTask()">Add Task</button>
+    </div>
+    <ul id="taskList"></ul>
+</div>
+
+<script>
+    function addTask() {
+        var taskInput = document.getElementById("taskInput");
+        var prioritySelect = document.getElementById("prioritySelect");
+        var dueDate = document.getElementById("dueDate");
+        var taskList = document.getElementById("taskList");
+
+        if (taskInput.value !== "") {
+            var li = document.createElement("li");
+            var span = document.createElement("span");
+            span.appendChild(document.createTextNode(taskInput.value));
+            li.appendChild(span);
+
+            var prioritySpan = document.createElement("span");
+            prioritySpan.classList.add(prioritySelect.value === "high" ? "high-priority" : "low-priority");
+            prioritySpan.appendChild(document.createTextNode(prioritySelect.value === "high" ? "High" : "Low"));
+            li.appendChild(prioritySpan);
+
+            if (dueDate.value) {
+                var dueDateSpan = document.createElement("span");
+                dueDateSpan.classList.add("due-date");
+                dueDateSpan.appendChild(document.createTextNode(dueDate.value));
+                li.appendChild(dueDateSpan);
+            }
+
+            var removeBtn = document.createElement("i");
+            removeBtn.classList.add("far", "fa-trash-alt", "remove-button");
+            removeBtn.onclick = function() {
+                li.remove();
+            };
+            li.appendChild(removeBtn);
+
+            taskList.appendChild(li);
+            taskInput.value = "";
+            dueDate.value = "";
+        } else {
+            alert("Please enter a task.");
+        }
+    }
+
+    function toggleTodoList() {
+        var todoContainer = document.getElementById('todoContainer');
+        if (todoContainer.style.display === "none") {
+            todoContainer.style.display = "block";
+        } else {
+            todoContainer.style.display = "none";
+        }
+    }
+</script>
+
+</body>
+</html>
