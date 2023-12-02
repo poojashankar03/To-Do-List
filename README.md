@@ -35,10 +35,4 @@ The application features a clean and responsive design with a pleasant color sch
 
 - [Font Awesome](https://fontawesome.com/) - Icons used for the trash icon.
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- Thanks to [Font Awesome](https://fontawesome.com/) for providing the icons.
+## Happy Coding 👩‍💻✨
